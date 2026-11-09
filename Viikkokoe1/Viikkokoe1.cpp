@@ -1,6 +1,191 @@
 #include <iostream>
 #include <cstdlib>
 
+using namespace std;
+
+void tarkista(int num);
+void terveiset(int num);
+void kertoma(int num);
+void tarkista_jaollisuus(int jaettava, int jakaja);
+
+class GrandFather
+{
+private:
+	std::string Grandname;
+public:
+	GrandFather() {};
+	void setGrandName(std::string newName) {
+		Grandname = newName;
+	};
+	std::string getGrandName() {
+		return Grandname;
+	};
+};
+
+class Father : public GrandFather
+{
+private:
+	std::string Fathername;
+public:
+	Father() {};
+	void setFatherName(std::string newName) {
+		Fathername = newName;
+	};
+	std::string getFatherName() {
+		return Fathername;
+	};
+};
+
+class Son : public Father
+{
+	std::string name;
+public:
+	Son(std::string value){
+		name = value;
+		setFatherName("Father of " + name);
+		setGrandName("Grandfather of " + name);
+	};
+	void setName(std::string newName) {
+		name = newName;
+	};
+	std::string getName() {
+		return name;
+	};
+};
+
+int main()
+{
+
+	Son objectSon("Kari");
+	std::cout << objectSon.getName() << std::endl;
+	std::cout << objectSon.getFatherName() << std::endl;
+	std::cout << objectSon.getGrandName() << std::endl;
+	/*
+	// to use these, move the class definitions above main() or add function prototypes
+	Calculator calc;
+
+	calc.inputOperands();
+	calc.calculateResult();
+	calc.showResults();
+	*/
+
+	//std::srand(15);
+
+	/*
+	int num;
+
+	std::cin >> num;
+	kertoma(num);
+	tarkista_jaollisuus(num, 10);
+	*/
+	
+	/*
+	std::cout << "?";
+	int num;
+	std::cin >> num;
+	num = num * 2;
+	std::cout << num;
+
+	int a = 4;
+	int b = 5;
+
+	int something = 1 + (2 * (a * b));
+
+	std::cout << something;
+
+	tarkista(1);
+	tarkista(-1);
+	tarkista(0);
+
+	terveiset(3);
+	*/
+	return 0;
+}
+
+class BasicALU
+{
+public:
+	BasicALU()
+	{
+		cout << "BasicALU constructor!!" << endl;
+	};
+	double sum(double a, double b) {
+		return a + b;
+	};
+	double mul(double a, double b) {
+		return a * b;
+	};
+	double sub(double a, double b) {
+		return a - b;
+	};
+	double div(double a, double b) {
+		if (b == 0) {
+			return 0;
+		}
+		else {
+			return a / b;
+		}
+	};
+};
+
+class Calculator : public BasicALU
+{
+private:
+	double op1;
+	double op2;
+	double result;
+	char operation;
+public:
+	Calculator();
+	void inputOperands(void);
+	void calculateResult(void);
+	void showResults(void);
+};
+
+Calculator::Calculator()
+{
+	cout << "Calculator constructor!!" << endl;
+}
+
+void Calculator::inputOperands()
+{
+
+	cout << "Give first operand" << endl;
+	cin >> op1;
+
+	cout << "Give operation +, -, * or / " << endl;
+	cin >> operation;
+
+	cout << "Give second operand" << endl;
+	cin >> op2;
+}
+
+void Calculator::calculateResult()
+{
+	switch (operation) {
+	case '+':
+		result = sum(op1, op2);
+		break;
+	case '-':
+		result = sub(op1, op2);
+		break;
+	case '*':
+		result = mul(op1, op2);
+		break;
+	case '/':
+		result = div(op1, op2);
+		break;
+	default:
+		cout << "No such operation!" << endl;
+
+	}
+}
+
+void Calculator::showResults()
+{
+	cout << op1 << operation << op2 << " = " << result << endl;
+}
+
 void tarkista(int num)
 {
 	if (num > 0)
@@ -66,39 +251,4 @@ void sarja(int sluku)
 		int random = std::rand() % 20;
 		std::cout << random << std::endl;
 	}
-}
-
-int main()
-{
-	std::srand(15);
-
-	/*
-	int num;
-
-	std::cin >> num;
-	kertoma(num);
-	tarkista_jaollisuus(num, 10);
-	*/
-	
-	/*
-	std::cout << "?";
-	int num;
-	std::cin >> num;
-	num = num * 2;
-	std::cout << num;
-
-	int a = 4;
-	int b = 5;
-
-	int something = 1 + (2 * (a * b));
-
-	std::cout << something;
-
-	tarkista(1);
-	tarkista(-1);
-	tarkista(0);
-
-	terveiset(3);
-	*/
-	return 0;
 }
