@@ -8,58 +8,53 @@ void terveiset(int num);
 void kertoma(int num);
 void tarkista_jaollisuus(int jaettava, int jakaja);
 
-class GrandFather
-{
+class Roof {
 private:
-	std::string Grandname;
+	string material;
 public:
-	GrandFather() {};
-	void setGrandName(std::string newName) {
-		Grandname = newName;
-	};
-	std::string getGrandName() {
-		return Grandname;
-	};
+	void setMaterial(string value) {
+		material = value;
+	}
+	string getMaterial() {
+		return material;
+	}
 };
 
-class Father : public GrandFather
-{
+class House {
 private:
-	std::string Fathername;
+	Roof roof;
 public:
-	Father() {};
-	void setFatherName(std::string newName) {
-		Fathername = newName;
-	};
-	std::string getFatherName() {
-		return Fathername;
-	};
-};
-
-class Son : public Father
-{
-	std::string name;
-public:
-	Son(std::string value){
-		name = value;
-		setFatherName("Father of " + name);
-		setGrandName("Grandfather of " + name);
-	};
-	void setName(std::string newName) {
-		name = newName;
-	};
-	std::string getName() {
-		return name;
+	void setRoof(string value) {
+		roof.setMaterial(value);
+	}
+	void printData() {
+		cout << "Katto materiaali on " << roof.getMaterial() << endl;
 	};
 };
 
 int main()
 {
+	House house;
+	house.setRoof("pelti");
+	house.printData();
 
+	/*
+	// to use these, move the class definitions above main() or add function prototypes
+	ClassA a;
+	ClassB b;
+	ClassB& bRef = b;
+
+	a.print1(b); // Association
+	a.print2(bRef); // Aggregation
+	a.print3(); // Composition
+	*/
+	/*
+	// to use these, move the class definitions above main() or add function prototypes
 	Son objectSon("Kari");
 	std::cout << objectSon.getName() << std::endl;
 	std::cout << objectSon.getFatherName() << std::endl;
 	std::cout << objectSon.getGrandName() << std::endl;
+	*/
 	/*
 	// to use these, move the class definitions above main() or add function prototypes
 	Calculator calc;
@@ -101,6 +96,122 @@ int main()
 	*/
 	return 0;
 }
+
+class ClassB
+{
+public:
+	ClassB();
+	void printAssosiation(void);
+	void printAggregation(void);
+	void printComposition(void);
+};
+
+class ClassA
+{
+public:
+	ClassA();
+	void print1(ClassB B);
+	void print2(ClassB& B);
+	void print3();
+};
+//luokan ClassA toteutus(cpp)
+ClassA::ClassA() {}
+
+void ClassA::print1(ClassB B) {
+	B.printAssosiation();
+}
+void ClassA::print2(ClassB& B) {
+	B.printAggregation();
+}
+void ClassA::print3() {
+	ClassB B;
+	B.printComposition();
+}
+//luokan ClassB toteutus(cpp)
+ClassB::ClassB() {}
+void ClassB::printAssosiation() {
+	cout << "This is assosiation" << endl;
+}
+void ClassB::printAggregation() {
+	cout << "This is aggregation" << endl;
+}
+void ClassB::printComposition() {
+	cout << "This is composition" << endl;
+}
+
+
+class Bicycle
+{
+public:
+	Bicycle() {
+		std::cout << "A new Bicycle created" << endl;
+	};
+	~Bicycle() {
+		std::cout << "Bicycle deleted" << endl;
+	};
+};
+
+class Storage
+{
+private:
+	Bicycle a;
+	Bicycle b;
+	Bicycle c;
+public:
+	Storage() {
+		std::cout << "A new bicycle storage created" << endl;
+	};
+	~Storage() {
+		std::cout << "Bicycle storage deleted" << endl;
+	};
+};
+
+
+class GrandFather
+{
+private:
+	std::string Grandname;
+public:
+	GrandFather() {};
+	void setGrandName(std::string newName) {
+		Grandname = newName;
+	};
+	std::string getGrandName() {
+		return Grandname;
+	};
+};
+
+class Father : public GrandFather
+{
+private:
+	std::string Fathername;
+public:
+	Father() {};
+	void setFatherName(std::string newName) {
+		Fathername = newName;
+	};
+	std::string getFatherName() {
+		return Fathername;
+	};
+};
+
+class Son : public Father
+{
+	std::string name;
+public:
+	Son(std::string value) {
+		name = value;
+		setFatherName("Father of " + name);
+		setGrandName("Grandfather of " + name);
+	};
+	void setName(std::string newName) {
+		name = newName;
+	};
+	std::string getName() {
+		return name;
+	};
+};
+
 
 class BasicALU
 {
