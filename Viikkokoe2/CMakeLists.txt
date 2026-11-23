@@ -7,5 +7,4 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_executable(viikkokoe2
 viikkokoe2.cpp
-MyClass.cpp
  "Apartment.h" "Vehicle.h")
